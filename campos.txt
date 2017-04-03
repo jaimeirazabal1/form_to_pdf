@@ -1,0 +1,32 @@
+
+colegio    : varchar(40)
+nombre    : varchar(100)
+curso        : varchar(40)
+fechaDeNacimiento : dateTime
+nacionalidad : varchar(30)
+mail  :  varchar(40);
+fuma : bit/boolean
+direccion : varchar(50)
+vivocon : varchar(30)
+hobbys  : varchar(50)
+genero : bit/boolean
+numIdentidad : varchar(30)
+religion : varchar(20)
+celular : varchar(20)
+tallapolera : varchar(2)
+telefonofijo : varchar(20)
+nivelidioma varchar(100)
+otrosAntecedentes : varchar(200)
+nombrePadre : varchar(100)
+edadPadre : int
+mailPadre : varchar(40)
+celularPadre : varchar(20)
+nombreMadre : varchar(100)
+edadMadre : int
+mailMadre : varchar(40)
+celularMadre : varchar(20)
+tengoParientes : bit/boolean
+tengoAfitriones : bit/boolean
+nombreAnfitrion : varchar(100)
+direccionAnfitrion : varchar(50)
+mailAnfitrion  : varchar(40) 
