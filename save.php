@@ -33,6 +33,7 @@ include_once('message.php');
 	</script>
 </head>
 <body>
+<?php ob_start(); ?>
 	<div class="container">
 		<div class="header">
 			<div class="col-md-9 col-sm-9 col-xs-9 text-left">
@@ -82,7 +83,7 @@ include_once('message.php');
 						<tr>
 							<td class="label_table1"><b>Geburtsdatum: </b> <br> <span class="peque">Fecha de nacimiento</span></td>
 							<td class="input_table">
-								<input type="text" class="form-control" id="datetimepicker1" name="fechaDeNacimiento"></td>
+								<input type="text" class="form-control" id="datetimepicker1" alue="<?php echo isset($_POST['fechaDeNacimiento']) ? $_POST['fechaDeNacimiento'] : ''  ?>" name="fechaDeNacimiento"></td>
 							<td class="label_table1"><b>
 								<select name="numIdentidad" id="" class="form-control">
 									<option value="Nr. Reisepass" <?php if(isset($_POST['numIdentidad']) and $_POST['numIdentidad'] == "Nr. Reisepass"): echo "selected"; endif; ?>>Nr. Reisepass</option>
@@ -258,10 +259,22 @@ include_once('message.php');
 		<br><br>
 	</div>
 	</form>
-	<?php if ($_POST): ?>
-		<pre>
-			<?php var_dump($_POST) ?>
-		</pre>
-	<?php endif ?>
+	<?php 
+    $content = ob_get_clean();
+
+    // convert to PDF
+    require_once(dirname(__FILE__).'/../vendor/autoload.php');
+    try
+    {
+        $html2pdf = new HTML2PDF('P', 'A4', 'fr', true, 'UTF-8', 3);
+        $html2pdf->pdf->SetDisplayMode('fullpage');
+        $html2pdf->writeHTML($content, isset($_GET['vuehtml']));
+        $html2pdf->Output('exemple03.pdf');
+    }
+    catch(HTML2PDF_exception $e) {
+        echo $e;
+        exit;
+    }
+?>
 </body>
 </html>
