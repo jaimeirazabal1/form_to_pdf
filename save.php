@@ -1,12 +1,5 @@
-<?php
-session_start();
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-//include_once('db.php');
-include_once('message.php');
-//$db = new Db();
-?>
+<?php error_reporting(0); ?>
+<?php ob_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,7 +26,7 @@ include_once('message.php');
 	</script>
 </head>
 <body>
-<?php ob_start(); ?>
+
 	<div class="container">
 		<div class="header">
 			<div class="col-md-9 col-sm-9 col-xs-9 text-left">
@@ -47,13 +40,14 @@ include_once('message.php');
 
 	</div>
 	<br>
+	<form class="form-horizontal">
 	<div class="container">
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h3 class="panel-title">I. PERSÖNLICHE ANGABEN / <i>datos personales</i></h3>
 			</div>
 			<div class="panel-body">
-				<form class="form-horizontal">
+				
 				      <img src="foto.jpg" class="thumbnail" alt="PassFoto">
 					<table class="table table-bordered">
 						<tr>
@@ -110,7 +104,6 @@ include_once('message.php');
 								</select>
 							</td>
 							<td class="input_table" colspan="2"><input type="text" name="celular" value="<?php echo isset($_POST['celular']) ? $_POST['celular'] : ''  ?>" class="form-control"></td>
-
 						</tr>
 						<tr>
 							<td class="label_table1"><b>Ich rauche: </b> <br> <span class="peque">Yo fumo</span></td>
@@ -184,7 +177,6 @@ include_once('message.php');
 						<td class="input_table " colspan="2" ><input type="text" class="form-control" value="<?php echo isset($_POST['nombrePadre']) ? $_POST['nombrePadre'] : ''  ?>"  name="nombrePadre"></td>
 						<td class="label_table text-right" ><b>Alter:  </b> <br> <span class="peque">Edad</span></td>
 						<td class="input_table1" ><input type="text" name="edadPadre" value="<?php echo isset($_POST['edadPadre']) ? $_POST['edadPadre'] : ''  ?>" class="form-control"></td>
-
 					</tr>
 					<tr>
 						<td class="label_table"><b>Mail:  </b> <br> <span class="peque">Mail</span></td>
@@ -198,14 +190,12 @@ include_once('message.php');
 								</select>
 							</td>
 							<td class="input_table" colspan="2"><input type="text" name="celularPadre" value="<?php echo isset($_POST['celularPadre']) ? $_POST['celularPadre'] : ''  ?>" class="form-control"></td>
-
 					</tr>
 					<tr>
 						<td class="label_table2"><b>Nach- und Vorname der Mutter: </b> <br> <span class="peque">Apellidos y nombre madre    </span></td>
 						<td class="input_table " colspan="2" ><input type="text" name="nombreMadre" value="<?php echo isset($_POST['nombreMadre']) ? $_POST['nombreMadre'] : ''  ?>" class="form-control"></td>
 						<td class="label_table text-right" ><b>Alter:  </b> <br> <span class="peque">Edad</span></td>
 						<td class="input_table1" ><input type="text" class="form-control" value="<?php echo isset($_POST['edadMadre']) ? $_POST['edadMadre'] : ''  ?>" name="edadMadre"></td>
-
 					</tr>
 					<tr>
 						<td class="label_table"><b>Mail:  </b> <br> <span class="peque">Mail</span></td>
@@ -259,17 +249,16 @@ include_once('message.php');
 		<br><br>
 	</div>
 	</form>
+
 	<?php 
     $content = ob_get_clean();
-
-    // convert to PDF
-    require_once(dirname(__FILE__).'/../vendor/autoload.php');
+    require_once(dirname(__FILE__).'/html2pdf-4.5.1/vendor/autoload.php');
     try
     {
-        $html2pdf = new HTML2PDF('P', 'A4', 'fr', true, 'UTF-8', 3);
+        $html2pdf = new HTML2PDF('P', 'letter', 'es', true, 'UTF-8', 3);
         $html2pdf->pdf->SetDisplayMode('fullpage');
-        $html2pdf->writeHTML($content, isset($_GET['vuehtml']));
-        $html2pdf->Output('exemple03.pdf');
+        $html2pdf->writeHTML($content,false);
+        $html2pdf->Output('another_world.pdf');
     }
     catch(HTML2PDF_exception $e) {
         echo $e;
