@@ -19,7 +19,14 @@ if (move_uploaded_file($_FILES['fichero_usuario']['tmp_name'], $fichero_subido))
 	}	
 	echo '<meta http-equiv="refresh" content="2; url=index.php" />';
 }
-
+$finalName = "planillas/".$photo_name.".txt";
+$file = fopen($finalName, "w");
+$size = filesize($finalName);
+foreach ($_POST as $key => $value) {
+	# code...
+	fwrite($file, $key."=".$_POST[$key]."\n");
+}
+fclose($file);
 $html='
 <style type="text/css">
 	.thumbnail{
@@ -64,7 +71,7 @@ $html='
 							<td></td>
 							<td class="foto_table" colspan="2">
 								<center>
-									<img src="photos/'.$photo_name.'" class="thumbnail" alt="PassFoto">
+									<img src="photos/'.$photo_name.'" class="thumbnail" alt="PassFoto" width="150" height="120">
 								</center>
 							</td>
 						</tr>
@@ -148,7 +155,7 @@ $html='
 							<td class="label_table1"><b>Sonstige Bemerkungen* </b> <br> <span class="peque">Otros antecedentes importantes </span></td>
 							<td class="input_table" colspan="4">
 								<p>'.$_POST['otrosAntecedentes'].'</p>
-								<p class="peque">Angaben zu chronischen und psychischen Krankheiten, Essgewohnheiten etc . (en cuánto a enfermedades crónicas, trastorno pscicologico, hábitos alimenticios etc.)</p>
+								<p class="peque"><b>Angaben zu chronischen und psychischen Krankheiten, Essgewohnheiten etc . (en cuánto a enfermedades crónicas, trastorno pscicologico, hábitos alimenticios etc.)</b></p>
 							</td>
 						</tr>	
 					</table>
