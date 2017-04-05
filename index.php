@@ -52,8 +52,9 @@ include_once('message.php');
 				<h3 class="panel-title">I. PERSÖNLICHE ANGABEN / <i>datos personales</i></h3>
 			</div>
 			<div class="panel-body">
-				<form class="form-horizontal" method="post" action="save.php">
-				      <img src="foto.jpg" class="thumbnail" alt="PassFoto">
+				<form class="form-horizontal" method="post" action="save.php" enctype="multipart/form-data">
+				      <img src="foto.jpg" class="thumbnail" alt="PassFoto" onclick="$('#file').click()">
+				      <input name="fichero_usuario" type="file" id="file" style="display:none"/>
 					<table class="table table-bordered">
 						<tr>
 							<td class="label_table"><b>Meine Schule:</b> <br> <span class="peque">Mi colegio</span></td>
@@ -209,13 +210,13 @@ include_once('message.php');
 						<td class="input_table" ><input type="text" class="form-control" name="mailMadre"></td>
 							<td class="label_table1 text-right"><b>Handy: </b> <br> <span class="peque">Celular</span></td>
 							<td>
-								<select name="celularMadre" id="" class="form-control">
+								<select name="celularMadre_code" id="" class="form-control">
 									<option value="+56">+56</option>
 									<option value="+49">+49</option>
 									<option value="+43">+43</option>
 								</select>
 							</td>
-							<td class="input_table" colspan="2"><input type="text" class="form-control"></td>
+							<td class="input_table" colspan="2"><input type="text" name="celularMadre" class="form-control"></td>
 
 					</tr>
 				</table>
