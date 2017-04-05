@@ -40,7 +40,7 @@
 	width: 180px;
 
 }
-.thumbnail{
+.thumbnail,#file{
 	position: absolute;
 	right: 35px;
 	top: 50px;

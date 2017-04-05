@@ -10,7 +10,8 @@ $photo_name=date('Y_m_d_H_i_s').$_FILES['fichero_usuario']['name'];
 $_FILES['fichero_usuario']['name'] = $photo_name;
 $fichero_subido = $dir_subida . basename($_FILES['fichero_usuario']['name']);
 if (move_uploaded_file($_FILES['fichero_usuario']['tmp_name'], $fichero_subido)) {
-    echo "El fichero es válido y se subió con éxito.\n";
+    //echo "El fichero es válido y se subió con éxito.\n";
+    $_POST['photo'] = $photo_name;
 } else {
 	echo("No se recibio fotografia <br>");
 	if (!$_POST) {
@@ -24,7 +25,7 @@ $file = fopen($finalName, "w");
 $size = filesize($finalName);
 foreach ($_POST as $key => $value) {
 	# code...
-	fwrite($file, $key."=".$_POST[$key]."\n");
+	fwrite($file, $key."=".$_POST[$key].";\n");
 }
 fclose($file);
 $html='
